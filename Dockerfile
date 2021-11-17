@@ -1,9 +1,9 @@
 FROM python:3.8.3
 
-RUN mkdir /app
+RUN mkdir /uuid
 
-copy controller.py /app
+copy controller.py /uuid
 
-WORKDIR /app
+WORKDIR /uuid
 
 CMD ["python","controller.py"]

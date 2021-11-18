@@ -22,8 +22,8 @@ def commit_and_push():
         lock_util.remove_lock(current_lock)
 
 def config():
-    os.system("git config --global user.email \"gaojing1996@vip.qq.com\"")
-    os.system("git config --global user.name \"Gnosis\"")
+    os.system("git config --global user.email \"liuhuibinbin@163.com\"")
+    os.system("git config --global user.name \"willowhb\"")
 
 def pull():
     os.system("git pull")

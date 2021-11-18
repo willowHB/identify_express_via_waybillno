@@ -1,8 +1,6 @@
 # 基础镜像centos7
 FROM centos:7
 
-RUN  apt-get update
-RUN  apt-get upgrade -y
 # Install python3
 RUN set -ex \
     # 预安装所需组件

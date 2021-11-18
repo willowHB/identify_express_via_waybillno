@@ -8,7 +8,7 @@ RUN set -ex \
         sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel \
         && yum -y install gcc kernel-devel kenel-headers make bzip2 \
         && yum -y install gcc gcc-c++ zlib zlib-devel \
-        && yum -y install wget
+        && yum -y install wget \
     # 安装python并配置环境
     && wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz \
     && tar -zxvf Python-3.8.3.tgz \

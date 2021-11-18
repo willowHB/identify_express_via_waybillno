@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 
 # Install pip 安装三方依赖
-RUN pip install -r /identify_express_via_waybillno/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install -r /app/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install gunicorn prometheus-flask-exporter -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 CMD ["python","controller.py"]

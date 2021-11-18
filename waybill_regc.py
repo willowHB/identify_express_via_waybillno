@@ -17,6 +17,7 @@ documents = None
 dictionary = None
 file_content_map = None
 
+
 def identify_waybill_express(waybill_no):
     # 文档预处理
     pre_waybillno_str = utils.parse_waybillno(waybill_no)
@@ -43,7 +44,14 @@ def load_persistence_obj():
     finally:
         lock_util.remove_lock(current_lock)
 
+
 def calc_result_without_threshold(waybill_no, new_text, dictionary, index, tfidf, documents):
+    if dictionary is None or index is None or tfidf is None or documents is None or file_content_map is None:
+        load_persistence_obj()
+    if constants.reload:
+        t1 = threading.Thread(target=reload_objs)
+        t1.start()
+
     log.info('转化向量')
     new_vec = dictionary.doc2bow(new_text)
 
@@ -63,12 +71,15 @@ def calc_result_without_threshold(waybill_no, new_text, dictionary, index, tfidf
             result_list.append({"express_code": express_code, "prob_percentage": sim})
     return result_list
 
+
 def calc_result(waybill_no, new_text, dictionary, index, tfidf, documents):
     log.info('转化向量')
+    # 1,将要分析的文本向量化
     new_vec = dictionary.doc2bow(new_text)
 
     log.info('相似度分析并返回最大文本')
     new_vec_tfidf = tfidf[new_vec]
+    # 余弦相似度
     sims = index[new_vec_tfidf]
     log.info(sims)
     sims_list = sims.tolist()
@@ -92,6 +103,7 @@ def reload_objs():
     load_persistence_obj()
     constants.reload = False
 
+
 def regc(waybill_no):
     new_text = identify_waybill_express(waybill_no)
     if dictionary is None or index is None or tfidf is None or documents is None or file_content_map is None:
@@ -106,9 +118,11 @@ def regc(waybill_no):
     log.info("运单号：{} 判断结果：{}".format(waybill_no, json.dumps(result_list)))
     return result_list
 
+
 def regc_without_threshold(waybill_no):
     new_text = identify_waybill_express(waybill_no)
     return calc_result_without_threshold(waybill_no, new_text, dictionary, index, tfidf, documents)
+
 
 def has_result(waybill_no):
     try:
@@ -118,6 +132,7 @@ def has_result(waybill_no):
         return True
     except Exception as e:
         return True
+
 
 def main():
     waybill_no = 'JT5045023079024'

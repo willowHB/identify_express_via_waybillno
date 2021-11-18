@@ -21,6 +21,7 @@ RUN set -ex \
     && pip3 install --upgrade pip
 
 RUN mkdir /app
+# 添加项目的启动类
 COPY controller.py /app
 WORKDIR /app
 

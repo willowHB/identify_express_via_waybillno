@@ -4,12 +4,10 @@ RUN mkdir /app
 COPY controller.py /app
 WORKDIR /app
 
-# 添加项目
-ADD  ./home/yjt/identify_express_via_waybillno/ /identify_express_via_waybillno/
-# 添加三方依赖
-ADD ./home/yjt/identify_express_via_waybillno/requirements.txt /identify_express_via_waybillno/requirements.txt
+# 添加三方依赖文件
+COPY requirements.txt /app/requirements.txt
 
-# Install pip
+# Install pip 安装三方依赖
 RUN pip install -r /identify_express_via_waybillno/requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install gunicorn prometheus-flask-exporter -i https://pypi.tuna.tsinghua.edu.cn/simple
 

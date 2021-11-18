@@ -20,11 +20,6 @@ RUN set -ex \
     && pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
     && pip3 install --upgrade pip
 
-RUN  yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel \
-        sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel \
-        && yum -y install gcc kernel-devel kenel-headers make bzip2 \
-        && yum -y install gcc gcc-c++ zlib zlib-devel
-
 RUN mkdir /app
 COPY controller.py /app
 WORKDIR /app

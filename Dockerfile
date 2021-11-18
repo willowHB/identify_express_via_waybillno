@@ -17,8 +17,8 @@ RUN set -ex \
     && make && make install \
     && ln -s /usr/local/python3/bin/python3 /usr/bin/python3 \
     && ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3 \
-    && pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
-    && pip3 install --upgrade pip
+    && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
+    && pip install --upgrade pip
 
 RUN mkdir /app
 # 添加项目的启动类

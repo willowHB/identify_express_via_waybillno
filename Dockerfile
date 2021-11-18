@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 
 # Install pip 安装三方依赖
-RUN pip install -r /app/requirements.txt
-RUN pip install gunicorn prometheus-flask-exporter
+RUN pip install -r /app/requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
+RUN pip install gunicorn prometheus-flask-exporter -i https://mirrors.aliyun.com/pypi/simple/
 
 CMD ["python","controller.py"]
